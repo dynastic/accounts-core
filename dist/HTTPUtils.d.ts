@@ -2,7 +2,7 @@ declare type HTTPMethod = 'get' | 'post' | 'put' | 'patch' | 'delete';
 export declare type HTTPHeaders = {
     [key: string]: string;
 };
-declare type HTTPRequest = {
+type HTTPRequest = {
     url: string;
     query?: {
         [key: string]: any;
