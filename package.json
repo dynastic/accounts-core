@@ -1,0 +1,20 @@
+{
+  "name": "@dynastic-accounts/core",
+  "version": "2.0.0",
+  "description": "A core library for interacting with Dynastic Accounts.",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "rm -rf dist && tsc"
+  },
+  "repository": "git@github.com:dynastic/accounts-core.git",
+  "author": "Dynastic Development <hello@dynastic.co>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "axios": "^0.19.0"
+  },
+  "devDependencies": {
+    "typescript": "^2.5.3"
+  }
+}
