@@ -6,7 +6,7 @@
   "module": "./dist/index.es.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "npx rollup -c"
+    "build": "NODE_ENV=production npx rollup -c"
   },
   "repository": "git@github.com:dynastic/accounts-core.git",
   "author": "Dynastic <hello@dynastic.co>",
