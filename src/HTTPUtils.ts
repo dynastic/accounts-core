@@ -27,8 +27,6 @@ export interface Response {
     status: number;
 }
 
-const requests: any[] = [];
-
 function sendRequest(method: HTTPMethod, opts: HTTPRequest, resolve: (res: Response) => any, reject: (res: Response) => any) {
   const queryInURL = typeof opts.query === "string";
   const req = {
@@ -45,10 +43,10 @@ function sendRequest(method: HTTPMethod, opts: HTTPRequest, resolve: (res: Respo
     if (!res) {
       return reject(new Error("Didn't get a reply from the server.") as any);
     }
-    let data = res.data;
+    let body = res.data;
     if (typeof res.data === "string") {
       try {
-        data = JSON.parse(res.data);
+        body = JSON.parse(res.data);
       } catch (e) {
         reject(e);
       }
@@ -56,7 +54,7 @@ function sendRequest(method: HTTPMethod, opts: HTTPRequest, resolve: (res: Respo
 
     const newRes = {
       headers: res.headers,
-      body: data,
+      body,
       status: res.status
     }
 
@@ -81,25 +79,10 @@ function makeRequest(
 
 export type HTTPFunction = (req: string | HTTPRequest) => Promise<HTTPResponse>;
 
-const operations = {
+export const HTTPUtils = {
   get: makeRequest.bind(null, 'get') as HTTPFunction,
   post: makeRequest.bind(null, 'post') as HTTPFunction,
   put: makeRequest.bind(null, 'put') as HTTPFunction,
   patch: makeRequest.bind(null, 'patch') as HTTPFunction,
-  delete: makeRequest.bind(null, 'delete') as HTTPFunction
-};
-
-export namespace HTTPUtils {
-  export const get = makeRequest.bind(null, 'get') as HTTPFunction;
-  export const post = makeRequest.bind(null, 'post') as HTTPFunction;
-  export const put = makeRequest.bind(null, 'put') as HTTPFunction;
-  export const patch = makeRequest.bind(null, 'patch') as HTTPFunction;
-  export const del = makeRequest.bind(null, 'delete') as HTTPFunction;
+  del: makeRequest.bind(null, 'delete') as HTTPFunction
 }
-
-export const HTTPDebugValues = {
-    operations,
-    makeRequest,
-    sendRequest,
-    requests
-  }

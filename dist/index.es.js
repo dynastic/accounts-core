@@ -53,7 +53,6 @@ const ERROR_CODES = {
 const API_BASE = "https://accounts-api.dynastic.co";
 const FRONTEND_BASE = "https://accounts.dynastic.co";
 
-const requests = [];
 function sendRequest(method, opts, resolve, reject) {
     const queryInURL = typeof opts.query === "string";
     const req = {
@@ -69,10 +68,10 @@ function sendRequest(method, opts, resolve, reject) {
         if (!res) {
             return reject(new Error("Didn't get a reply from the server."));
         }
-        let data = res.data;
+        let body = res.data;
         if (typeof res.data === "string") {
             try {
-                data = JSON.parse(res.data);
+                body = JSON.parse(res.data);
             }
             catch (e) {
                 reject(e);
@@ -80,7 +79,7 @@ function sendRequest(method, opts, resolve, reject) {
         }
         const newRes = {
             headers: res.headers,
-            body: data,
+            body,
             status: res.status
         };
         if (res.status !== 200)
@@ -97,26 +96,12 @@ function makeRequest(method, opts) {
         sendRequest(method, opts, resolve, reject);
     });
 }
-const operations = {
+const HTTPUtils = {
     get: makeRequest.bind(null, 'get'),
     post: makeRequest.bind(null, 'post'),
     put: makeRequest.bind(null, 'put'),
     patch: makeRequest.bind(null, 'patch'),
-    delete: makeRequest.bind(null, 'delete')
-};
-var HTTPUtils;
-(function (HTTPUtils) {
-    HTTPUtils.get = makeRequest.bind(null, 'get');
-    HTTPUtils.post = makeRequest.bind(null, 'post');
-    HTTPUtils.put = makeRequest.bind(null, 'put');
-    HTTPUtils.patch = makeRequest.bind(null, 'patch');
-    HTTPUtils.del = makeRequest.bind(null, 'delete');
-})(HTTPUtils || (HTTPUtils = {}));
-const HTTPDebugValues = {
-    operations,
-    makeRequest,
-    sendRequest,
-    requests
+    del: makeRequest.bind(null, 'delete')
 };
 
 const extractAndThrowError = (err) => { throw (err.body && (err.body.error || err.body) || err); };
@@ -160,4 +145,4 @@ var Spec0 = /*#__PURE__*/Object.freeze({
 
 var AccountsAPI = Spec0;
 
-export { API_BASE, API_V0_ROUTES, AccountsAPI, DynasticAccountsAPI, DynasticAccountsAuthedAPI, ERROR_CODES, FRONTEND_BASE, HTTPDebugValues, HTTPUtils, extractBody, extractBoolean, extractSuccess, prefix };
+export { API_BASE, API_V0_ROUTES, AccountsAPI, DynasticAccountsAPI, DynasticAccountsAuthedAPI, ERROR_CODES, FRONTEND_BASE, HTTPUtils, extractBody, extractBoolean, extractSuccess, prefix };

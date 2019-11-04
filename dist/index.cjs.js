@@ -59,7 +59,6 @@ const ERROR_CODES = {
 const API_BASE = "https://accounts-api.dynastic.co";
 const FRONTEND_BASE = "https://accounts.dynastic.co";
 
-const requests = [];
 function sendRequest(method, opts, resolve, reject) {
     const queryInURL = typeof opts.query === "string";
     const req = {
@@ -75,10 +74,10 @@ function sendRequest(method, opts, resolve, reject) {
         if (!res) {
             return reject(new Error("Didn't get a reply from the server."));
         }
-        let data = res.data;
+        let body = res.data;
         if (typeof res.data === "string") {
             try {
-                data = JSON.parse(res.data);
+                body = JSON.parse(res.data);
             }
             catch (e) {
                 reject(e);
@@ -86,7 +85,7 @@ function sendRequest(method, opts, resolve, reject) {
         }
         const newRes = {
             headers: res.headers,
-            body: data,
+            body,
             status: res.status
         };
         if (res.status !== 200)
@@ -103,25 +102,12 @@ function makeRequest(method, opts) {
         sendRequest(method, opts, resolve, reject);
     });
 }
-const operations = {
+const HTTPUtils = {
     get: makeRequest.bind(null, 'get'),
     post: makeRequest.bind(null, 'post'),
     put: makeRequest.bind(null, 'put'),
     patch: makeRequest.bind(null, 'patch'),
-    delete: makeRequest.bind(null, 'delete')
-};
-(function (HTTPUtils) {
-    HTTPUtils.get = makeRequest.bind(null, 'get');
-    HTTPUtils.post = makeRequest.bind(null, 'post');
-    HTTPUtils.put = makeRequest.bind(null, 'put');
-    HTTPUtils.patch = makeRequest.bind(null, 'patch');
-    HTTPUtils.del = makeRequest.bind(null, 'delete');
-})(exports.HTTPUtils || (exports.HTTPUtils = {}));
-const HTTPDebugValues = {
-    operations,
-    makeRequest,
-    sendRequest,
-    requests
+    del: makeRequest.bind(null, 'delete')
 };
 
 const extractAndThrowError = (err) => { throw (err.body && (err.body.error || err.body) || err); };
@@ -140,7 +126,7 @@ class DynasticAccountsAuthedAPI {
     }
     /* User API */
     basicUser() {
-        return extractBody(exports.HTTPUtils.get({ url: this.api.API_V0.USER.BASE, query: "basic", headers: this.getHeaders(), timeout: 3 }));
+        return extractBody(HTTPUtils.get({ url: this.api.API_V0.USER.BASE, query: "basic", headers: this.getHeaders(), timeout: 3 }));
     }
 }
 
@@ -172,7 +158,7 @@ exports.DynasticAccountsAPI = DynasticAccountsAPI;
 exports.DynasticAccountsAuthedAPI = DynasticAccountsAuthedAPI;
 exports.ERROR_CODES = ERROR_CODES;
 exports.FRONTEND_BASE = FRONTEND_BASE;
-exports.HTTPDebugValues = HTTPDebugValues;
+exports.HTTPUtils = HTTPUtils;
 exports.extractBody = extractBody;
 exports.extractBoolean = extractBoolean;
 exports.extractSuccess = extractSuccess;
