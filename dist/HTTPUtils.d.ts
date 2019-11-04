@@ -29,14 +29,13 @@ export interface Response {
 declare function sendRequest(method: HTTPMethod, opts: HTTPRequest, resolve: (res: Response) => any, reject: (res: Response) => any): void;
 declare function makeRequest(method: HTTPMethod, opts: string | HTTPRequest): Promise<HTTPResponse>;
 export declare type HTTPFunction = (req: string | HTTPRequest) => Promise<HTTPResponse>;
-declare namespace HTTPUtils {
+export declare namespace HTTPUtils {
     const get: HTTPFunction;
     const post: HTTPFunction;
     const put: HTTPFunction;
     const patch: HTTPFunction;
     const del: HTTPFunction;
 }
-export default HTTPUtils;
 export declare const HTTPDebugValues: {
     operations: {
         get: HTTPFunction;
@@ -49,3 +48,4 @@ export declare const HTTPDebugValues: {
     sendRequest: typeof sendRequest;
     requests: any[];
 };
+export {};

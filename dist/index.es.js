@@ -112,7 +112,6 @@ var HTTPUtils;
     HTTPUtils.patch = makeRequest.bind(null, 'patch');
     HTTPUtils.del = makeRequest.bind(null, 'delete');
 })(HTTPUtils || (HTTPUtils = {}));
-var HTTPUtils$1 = HTTPUtils;
 const HTTPDebugValues = {
     operations,
     makeRequest,
@@ -136,7 +135,7 @@ class DynasticAccountsAuthedAPI {
     }
     /* User API */
     basicUser() {
-        return extractBody(HTTPUtils$1.get({ url: this.api.API_V0.USER.BASE, query: "basic", headers: this.getHeaders(), timeout: 3 }));
+        return extractBody(HTTPUtils.get({ url: this.api.API_V0.USER.BASE, query: "basic", headers: this.getHeaders(), timeout: 3 }));
     }
 }
 
@@ -161,4 +160,4 @@ var Spec0 = /*#__PURE__*/Object.freeze({
 
 var AccountsAPI = Spec0;
 
-export { API_BASE, API_V0_ROUTES, AccountsAPI, DynasticAccountsAPI, DynasticAccountsAuthedAPI, ERROR_CODES, FRONTEND_BASE, HTTPDebugValues, extractBody, extractBoolean, extractSuccess, prefix };
+export { API_BASE, API_V0_ROUTES, AccountsAPI, DynasticAccountsAPI, DynasticAccountsAuthedAPI, ERROR_CODES, FRONTEND_BASE, HTTPDebugValues, HTTPUtils, extractBody, extractBoolean, extractSuccess, prefix };

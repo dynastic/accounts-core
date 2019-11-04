@@ -1,6 +1,6 @@
 import * as Spec0 from "./spec0";
 import { extractBody } from "./ResponseUtils";
-import HTTPUtils, { HTTPHeaders } from "./HTTPUtils";
+import { HTTPUtils, HTTPHeaders } from "./HTTPUtils";
 import { DynasticAccountsAPI } from "./API";
 
 export class DynasticAccountsAuthedAPI {

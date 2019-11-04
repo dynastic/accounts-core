@@ -19,10 +19,6 @@ export type HTTPResponse = {
   body: any,
 };
 
-type HTTPError = {
-  err: Error,
-};
-
 export interface Response {
     headers: {
         [key: string]: string
@@ -93,15 +89,13 @@ const operations = {
   delete: makeRequest.bind(null, 'delete') as HTTPFunction
 };
 
-namespace HTTPUtils {
+export namespace HTTPUtils {
   export const get = makeRequest.bind(null, 'get') as HTTPFunction;
   export const post = makeRequest.bind(null, 'post') as HTTPFunction;
   export const put = makeRequest.bind(null, 'put') as HTTPFunction;
   export const patch = makeRequest.bind(null, 'patch') as HTTPFunction;
   export const del = makeRequest.bind(null, 'delete') as HTTPFunction;
 }
-
-export default HTTPUtils;
 
 export const HTTPDebugValues = {
     operations,

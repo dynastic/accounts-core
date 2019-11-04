@@ -110,15 +110,13 @@ const operations = {
     patch: makeRequest.bind(null, 'patch'),
     delete: makeRequest.bind(null, 'delete')
 };
-var HTTPUtils;
 (function (HTTPUtils) {
     HTTPUtils.get = makeRequest.bind(null, 'get');
     HTTPUtils.post = makeRequest.bind(null, 'post');
     HTTPUtils.put = makeRequest.bind(null, 'put');
     HTTPUtils.patch = makeRequest.bind(null, 'patch');
     HTTPUtils.del = makeRequest.bind(null, 'delete');
-})(HTTPUtils || (HTTPUtils = {}));
-var HTTPUtils$1 = HTTPUtils;
+})(exports.HTTPUtils || (exports.HTTPUtils = {}));
 const HTTPDebugValues = {
     operations,
     makeRequest,
@@ -142,7 +140,7 @@ class DynasticAccountsAuthedAPI {
     }
     /* User API */
     basicUser() {
-        return extractBody(HTTPUtils$1.get({ url: this.api.API_V0.USER.BASE, query: "basic", headers: this.getHeaders(), timeout: 3 }));
+        return extractBody(exports.HTTPUtils.get({ url: this.api.API_V0.USER.BASE, query: "basic", headers: this.getHeaders(), timeout: 3 }));
     }
 }
 
