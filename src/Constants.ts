@@ -35,7 +35,8 @@ export const ERROR_CODES = {
     LINKED_TO_ANOTHER_ACCOUNT: 1019,
     NO_FALLBACK_LOGIN_METHOD: 1020,
     INVALID_SESSION_TOKEN: 1021,
-    BANNED: 1022
+    BANNED: 1022,
+    AGREEMENT_REQUIRED: 1023
 }
 
 export const API_BASE = "https://accounts-api.dynastic.co";

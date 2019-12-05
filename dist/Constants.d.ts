@@ -31,6 +31,7 @@ export declare const ERROR_CODES: {
     NO_FALLBACK_LOGIN_METHOD: number;
     INVALID_SESSION_TOKEN: number;
     BANNED: number;
+    AGREEMENT_REQUIRED: number;
 };
 export declare const API_BASE = "https://accounts-api.dynastic.co";
 export declare const FRONTEND_BASE = "https://accounts.dynastic.co";
