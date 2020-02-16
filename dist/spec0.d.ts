@@ -23,6 +23,19 @@ export interface RequestField {
     type: RequestFieldType;
     iconClass?: string;
 }
+export interface TransactionCountry {
+    name: string;
+    code: string;
+    requiresZip?: boolean;
+    regionInfo?: TransactionRegionInfo;
+}
+export interface TransactionRegionInfo {
+    localisedName: string;
+    values: {
+        name: string;
+        code: string;
+    }[];
+}
 export declare type TransactionStatus = "created" | "approved" | "failed" | "pending" | "completed" | "refunded" | "denied";
 export interface Transaction {
     id: string;
@@ -35,6 +48,7 @@ export interface Transaction {
     date: number;
     statusDate: number;
     fields: Field[];
+    countries: TransactionCountry[];
 }
 export interface TransactionRequest {
     title: string;
