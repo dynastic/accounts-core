@@ -5,7 +5,7 @@ import { prefix } from "./util";
 export class DynasticAccountsAPI {
     API_V0 = API_V0_ROUTES;
 
-    constructor(apiBaseURL: string, public clientID: string, public clientSecret: string) {
+    constructor(public apiBaseURL: string, public clientID: string, public clientSecret: string) {
         // Prefix API routes with base URL
         this.API_V0 = prefix(this.API_V0, apiBaseURL);
     }

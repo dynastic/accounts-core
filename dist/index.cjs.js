@@ -133,6 +133,7 @@ class DynasticAccountsAuthedAPI {
 
 class DynasticAccountsAPI {
     constructor(apiBaseURL, clientID, clientSecret) {
+        this.apiBaseURL = apiBaseURL;
         this.clientID = clientID;
         this.clientSecret = clientSecret;
         this.API_V0 = API_V0_ROUTES;

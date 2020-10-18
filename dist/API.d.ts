@@ -1,5 +1,6 @@
 import { DynasticAccountsAuthedAPI } from "./AuthedAPI";
 export declare class DynasticAccountsAPI {
+    apiBaseURL: string;
     clientID: string;
     clientSecret: string;
     API_V0: {
